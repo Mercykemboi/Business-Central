@@ -110,7 +110,7 @@ page 50115 ApplicantCard
                     CurrPage.Close();
                 end;
             }
-            action(Approved)
+            action(Approval)
             {
                 ApplicationArea = All;
                 Promoted = true;
