@@ -18,6 +18,7 @@ table 50112 SaccoTable
           field(3;AccountNo; Decimal)
         {
             DataClassification = ToBeClassified;
+            TableRelation = "Bank Account";
             
         }
           field(4;AccountName; Text[100])
