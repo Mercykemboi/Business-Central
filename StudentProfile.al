@@ -5,10 +5,10 @@ table 50104 StudentProfile
 
     fields
     {
-        field(1; StudentNo; Integer)
+        field(1; StudentNo; Code[100])
         {
             DataClassification = ToBeClassified;
-            AutoIncrement = true;
+            //AutoIncrement = true;
 
         }
         field(2; FirstName; Text[100])
@@ -111,10 +111,17 @@ table 50104 StudentProfile
         isMale1: Boolean;
         isFemale1: Boolean;
 
+        NoSeriesManagement: Codeunit NoSeriesManagement;
+        NoSeries: Record "No. Series";
+        MySeries: Record MyNoSeries;
+
     trigger OnInsert()
     begin
         CreatedAt := Today;
         CreatedBy := UserId;
+        MySeries.Get();
+        MySeries.TestField(StudentNo);
+        StudentNo := NoSeriesManagement.GetNextNo(MySeries.StudentNo, Today, true);
 
     end;
 
