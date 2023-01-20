@@ -86,10 +86,21 @@ table 50113 MemberApplicant
             OptionMembers = New,Pending,Approved,Rejected;
         }
 
+        field(14;CreatedAt;Date){
 
+        }
+        field(15;CreatedBy;Text[100]){
 
+        }
+      field(16;AccountNo; Code[100]){
 
+      }
+      field(17;AccountName;Text[100]){
 
+      }
+      field(18;Amount;Decimal){
+        
+      }
 
     }
 
@@ -111,6 +122,9 @@ table 50113 MemberApplicant
         Member.Get();
         Member.TestField(MemberNos);
         MemberNo := NoSeriesManagement.GetNextNo(Member.MemberNos, Today, true);
+        CreatedAt := Today;
+        CreatedBy := UserId;
+        
     end;
 
     trigger OnModify()
@@ -127,5 +141,9 @@ table 50113 MemberApplicant
     begin
 
     end;
+
+    
+
+
 
 }

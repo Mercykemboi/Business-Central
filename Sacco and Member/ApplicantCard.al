@@ -86,6 +86,33 @@ page 50115 ApplicantCard
 
                 }
             }
+            group(AuditTrail)
+            {
+
+                field(CreatedAt; Rec.CreatedAt)
+                {
+
+                }
+                field(CreatedBy; Rec.CreatedBy)
+                {
+
+                }
+            }
+
+            group(AccountDetails){
+
+                field(AccountNo;Rec.AccountNo){
+
+                }
+                field(AccountName;Rec.AccountName){
+
+                }
+                field(Amount;Rec.Amount){
+                    
+                }
+            }
+
+
         }
     }
 
@@ -98,14 +125,15 @@ page 50115 ApplicantCard
                 ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Process;
+                Visible = send;
 
 
                 trigger OnAction()
                 begin
                     if Confirm('Sent For approval') then begin
-                    Rec.ApprovalStatus := rec.ApprovalStatus::Pending;
-                    Rec.Modify();
-                    Message('Sent Success')
+                        Rec.ApprovalStatus := rec.ApprovalStatus::Pending;
+                        Rec.Modify();
+                        Message('Sent Success')
                     end;
                     CurrPage.Close();
                 end;
@@ -115,30 +143,62 @@ page 50115 ApplicantCard
                 ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Process;
+                Visible = Approve;
 
                 trigger OnAction()
                 begin
-                  if Confirm('approved') then begin
-                    Rec.ApprovalStatus := Rec.ApprovalStatus::Approved;
-                    Rec.Modify();
-                    Message('Success');
-                  end;
-                  CurrPage.Close();
+                    //if Rec.CreatedAt := 
+                    if Confirm('approved') then begin
+                        Rec.ApprovalStatus := Rec.ApprovalStatus::Approved;
+                        Rec.Modify();
+                        Message('Success');
+                    end;
+                    CurrPage.Close();
                 end;
             }
-             action(Reject)
+            action(Reject)
             {
                 ApplicationArea = All;
                 Promoted = true;
                 PromotedCategory = Process;
+                Visible = reject;
 
 
                 trigger OnAction()
                 begin
                     if Confirm('Reject') then begin
-                    Rec.ApprovalStatus := rec.ApprovalStatus::Rejected;
-                    Rec.Modify();
-                    Message('Sent Success')
+                        Rec.ApprovalStatus := rec.ApprovalStatus::Rejected;
+                        Rec.Modify();
+                        Message('Sent Success')
+                    end;
+                end;
+            }
+            action(OpenAccount)
+            {
+                ApplicationArea = All;
+                Promoted = true;
+                PromotedCategory = Process;
+                Visible = open;
+
+
+                trigger OnAction()
+                begin
+                    if Confirm('Do You want to open a member account') then begin
+                        vendor.Init();
+                        vendor."No." := Rec.AccountNo;
+                        vendor.Name := Rec.MemberName;
+                        vendor."Balance (LCY)" := Rec.Amount;
+                        vendor.Balance := Rec.Amount;
+                        vendor."Search Name" := Rec.MemberName;
+                        vendor."Our Account No." := Rec.AccountNo;
+                        vendor.SaccoAccount := vendor.SaccoAccount::A;
+                    end;
+                    if Confirm('Do you want to open an Account') then begin
+                        customer.Init();
+                        customer."No." := Rec.MemberNo;
+                        customer.Name := Rec.MemberName;
+                        customer.SaccoType := customer.SaccoType::SaccoA;
+                        customer.Insert();
                     end;
                 end;
             }
@@ -148,8 +208,46 @@ page 50115 ApplicantCard
 
     var
         myInt: Integer;
-        Approve : Boolean;
-        pending :Boolean;
+        Approve: Boolean;
+        pending: Boolean;
+        reject: Boolean;
+        open: Boolean;
+
+        send: Boolean;
+
+        customer: Record Customer;
+
+        vendor: Record Vendor;
+
+
+    local procedure Visibility()
+    begin
+        Approve := false;
+        pending := false;
+        reject := false;
+        send := false;
+        open := false;
+
+
+        if Rec.ApprovalStatus = Rec.ApprovalStatus::New then begin
+            send := true;
+        end;
+
+        if Rec.ApprovalStatus = Rec.ApprovalStatus::Pending then begin
+            Approve := true;
+            reject := true;
+        end;
+        if Rec.ApprovalStatus = Rec.ApprovalStatus::Approved then begin
+            open := true;
+        end;
+    end;
+
+    trigger OnOpenPage()
+    begin
+        Visibility();
+
+    end;
+
 
 
 

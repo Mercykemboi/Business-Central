@@ -5,6 +5,7 @@ page 50121 ApprovalList
     UsageCategory = Lists;
     SourceTable = MemberApplicant;
     CardPageId = ApplicantCard;
+    SourceTableView = where(ApprovalStatus=filter(Approved));
 
     layout
     {
@@ -55,6 +56,12 @@ page 50121 ApprovalList
                 field(Signature; Rec.Signature)
                 {
                     ApplicationArea = All;
+
+                }
+                field(CreatedAt;Rec.CreatedAt){
+
+                }
+                field(CreatedBy;Rec.CreatedBy){
 
                 }
             }

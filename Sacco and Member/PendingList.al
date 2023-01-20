@@ -5,6 +5,7 @@ page 50120 PendingList
     UsageCategory = Lists;
     SourceTable = MemberApplicant;
     CardPageId = ApplicantCard;
+    SourceTableView = where(ApprovalStatus=filter(Pending)); 
 
     layout
     {

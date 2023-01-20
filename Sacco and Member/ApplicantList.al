@@ -57,6 +57,22 @@ page 50117 ApplicantList
                     ApplicationArea = All;
 
                 }
+                field(CreatedAt;Rec.CreatedAt){
+
+                }
+                field(CreatedBy;Rec.CreatedBy){
+                    
+                }
+                field(AccountNo;Rec.AccountNo){
+
+                }
+                field(AccountName;Rec.AccountName){
+
+                }
+                field(Amount; Rec.Amount)
+                {
+
+                }
             }
         }
         area(Factboxes)

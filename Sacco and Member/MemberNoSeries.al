@@ -14,6 +14,9 @@ table 50118 MemberNoSeries
            TableRelation = "No. Series";
             
         }
+        field(3;Account;code[100]){
+            TableRelation = "No. Series";
+        }
     }
     
     keys
