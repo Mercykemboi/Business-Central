@@ -5,7 +5,7 @@ page 50120 PendingList
     UsageCategory = Lists;
     SourceTable = MemberApplicant;
     CardPageId = ApplicantCard;
-    SourceTableView = where(ApprovalStatus=filter(Pending)); 
+    SourceTableView = where(ApprovalStatus = filter(Pending));
 
     layout
     {
@@ -56,6 +56,18 @@ page 50120 PendingList
                 field(Signature; Rec.Signature)
                 {
                     ApplicationArea = All;
+
+                }
+                field(AccountNo; Rec.AccountNo)
+                {
+
+                }
+                field(AccountName; Rec.AccountName)
+                {
+
+                }
+                field(Amount; Rec.Amount)
+                {
 
                 }
             }

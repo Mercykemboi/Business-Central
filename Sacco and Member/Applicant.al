@@ -1,7 +1,7 @@
 table 50113 MemberApplicant
 {
     DataClassification = ToBeClassified;
-    
+
 
     fields
     {
@@ -82,25 +82,30 @@ table 50113 MemberApplicant
         }
         field(13; ApprovalStatus; Option)
         {
-            
+
             OptionMembers = New,Pending,Approved,Rejected;
         }
 
-        field(14;CreatedAt;Date){
+        field(14; CreatedAt; Date)
+        {
 
         }
-        field(15;CreatedBy;Text[100]){
+        field(15; CreatedBy; Text[100])
+        {
 
         }
-      field(16;AccountNo; Code[100]){
+        field(16; AccountNo; Code[100])
+        {
 
-      }
-      field(17;AccountName;Text[100]){
+        }
+        field(17; AccountName; Text[100])
+        {
 
-      }
-      field(18;Amount;Decimal){
-        
-      }
+        }
+        field(18; Amount; Decimal)
+        {
+
+        }
 
     }
 
@@ -121,10 +126,12 @@ table 50113 MemberApplicant
     begin
         Member.Get();
         Member.TestField(MemberNos);
+        Member.TestField(Account);
         MemberNo := NoSeriesManagement.GetNextNo(Member.MemberNos, Today, true);
+        AccountNo := NoSeriesManagement.GetNextNo(Member.Account, Today, true);
         CreatedAt := Today;
         CreatedBy := UserId;
-        
+
     end;
 
     trigger OnModify()
@@ -142,7 +149,7 @@ table 50113 MemberApplicant
 
     end;
 
-    
+
 
 
 

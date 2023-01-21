@@ -4,9 +4,9 @@ tableextension 50101 CustomerVendor extends Vendor
     {
         field(50100; "SaccoAccount"; Option)
         {
-            Caption = '';
+            //Caption = '';
             DataClassification = ToBeClassified;
-            OptionMembers = A,B,C;
+            OptionMembers = ,A,B,C;
         }
     }
 }

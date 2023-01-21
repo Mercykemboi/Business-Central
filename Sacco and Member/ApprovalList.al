@@ -64,6 +64,15 @@ page 50121 ApprovalList
                 field(CreatedBy;Rec.CreatedBy){
 
                 }
+                field(AccountNo;Rec.AccountNo){
+
+                }
+                field(AccountName;Rec.AccountName){
+
+                }
+                field(Amount;Rec.Amount){
+                    
+                }
             }
         }
         area(Factboxes)

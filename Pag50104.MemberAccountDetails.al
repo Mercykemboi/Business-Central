@@ -1,16 +1,19 @@
-page 50104 "Member Account Details"
+page 50104 MemberAccountDetails
 {
-    Caption = 'Member Account Details';
+    Caption = 'MemberAccountDetails';
     PageType = List;
     SourceTable = Vendor;
-    UsageCategory = Administration;
-    SourceTableView = where(SaccoAccount=const(A));
+    UsageCategory = Lists;
+    SourceTableView = where(SaccoAccount = const(A));
+    ApplicationArea = all;
+    CardPageId = "Vendor Card";
+
 
     layout
     {
         area(content)
         {
-            group(General)
+            repeater(General)
             {
                 field(Balance; Rec.Balance)
                 {
@@ -52,6 +55,11 @@ page 50104 "Member Account Details"
                     ApplicationArea = All;
                     ToolTip = 'Specifies the vendor''s market type to link business transactions made for the vendor with the appropriate account in the general ledger.';
                 }
+                // field("Our Account No."; Rec."Our Account No.")
+                // {
+                //     ApplicationArea = All;
+                //     ToolTip = 'Specifies the vendor''s market type to link business transactions made for the vendor with the appropriate account in the general ledger.';
+                // }
             }
         }
     }

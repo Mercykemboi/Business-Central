@@ -99,16 +99,20 @@ page 50115 ApplicantCard
                 }
             }
 
-            group(AccountDetails){
+            group(AccountDetails)
+            {
 
-                field(AccountNo;Rec.AccountNo){
+                field(AccountNo; Rec.AccountNo)
+                {
 
                 }
-                field(AccountName;Rec.AccountName){
+                field(AccountName; Rec.AccountName)
+                {
 
                 }
-                field(Amount;Rec.Amount){
-                    
+                field(Amount; Rec.Amount)
+                {
+
                 }
             }
 
@@ -189,17 +193,18 @@ page 50115 ApplicantCard
                         vendor.Name := Rec.MemberName;
                         vendor."Balance (LCY)" := Rec.Amount;
                         vendor.Balance := Rec.Amount;
-                        vendor."Search Name" := Rec.MemberName;
-                        vendor."Our Account No." := Rec.AccountNo;
+                        //vendor."Search Name" := Rec.MemberName;
+                        //vendor."Our Account No." := Rec.AccountNo;
                         vendor.SaccoAccount := vendor.SaccoAccount::A;
+                        vendor.Insert();
                     end;
-                    if Confirm('Do you want to open an Account') then begin
-                        customer.Init();
-                        customer."No." := Rec.MemberNo;
-                        customer.Name := Rec.MemberName;
-                        customer.SaccoType := customer.SaccoType::SaccoA;
-                        customer.Insert();
-                    end;
+                    // if Confirm('Do you want to open an Account') then begin
+                    //     customer.Init();
+                    //     customer."No." := Rec.MemberNo;
+                    //     customer.Name := Rec.MemberName;
+                    //     customer.SaccoType := customer.SaccoType::SaccoA;
+                    //     customer.Insert();
+                    // end;
                 end;
             }
         }

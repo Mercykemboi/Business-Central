@@ -21,6 +21,10 @@ page 50119 MemberSeries
                     ApplicationArea = All;
 
                 }
+                field(Account; Rec.Account)
+                {
+
+                }
             }
         }
     }
